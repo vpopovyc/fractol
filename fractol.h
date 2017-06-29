@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 20:10:32 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/06/29 16:15:00 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/06/29 16:57:17 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 ** Compile rigth version of mlx correspoding to macos version
 */
 
-# if (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ == 101200)
+
+# if defined(__OSXSIERRA__)
     # include "mlx_10.12/mlx.h"
 # else
     # include "mlx_10.11/mlx.h"
