@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   control.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/28 19:24:46 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/06/28 22:32:52 by vpopovyc         ###   ########.fr       */
+/*   Created: 2017/07/10 14:40:57 by vpopovyc          #+#    #+#             */
+/*   Updated: 2017/07/11 18:14:50 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../headers/fractol.h"
 
 int     win_close(void) 
 {
@@ -23,12 +23,18 @@ int     key_event(int keycode, void *argument)
     printf("Keycode [%d]\n", keycode);
     if (keycode == ESCAPE)
         win_close();
+    else if (keycode == 83)
+    {
+        ((t_mlx*)argument)->current_fractal = 1; 
+        cl_update_model((t_mlx*)argument, MANDELBROT);
+    }
     return (0);
 }
 
 int     mouse_event(int keycode, int x, int y, void *argument) 
 {
     printf("Keycode [%d] x[%d] y[%d]\n", keycode, x, y);
+    (void)argument;
     return (0);
 }
 
@@ -38,21 +44,6 @@ int     motion_notify(int x, int y, void *argument)
     {
         printf("x[%d] y[%d]\n", x, y);
     }
-    return (0);
-}
-
-int     main(void)
-{
-    void *init = mlx_init();
-    void *win = mlx_new_window(init, WWIDTH, WHEIGHT, "fractol / vpopovyc");
-
-
-    mlx_hook(win, DESTROYNOTIFY, STRCTNOTMASK, win_close, NULL);
-    mlx_hook(win, KEYPRESS, KEYPRESSMASK, key_event, NULL);
-    mlx_hook(win, MOTIONNOTIFY, BUTTMOTNMASK, motion_notify, NULL);
-    
-    mlx_mouse_hook(win, mouse_event, NULL);
-    mlx_key_hook(win, key_event, NULL);
-    mlx_loop(init);
+    (void)argument;
     return (0);
 }

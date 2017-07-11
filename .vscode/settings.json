@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "*.cl": "c",
+        "fractol.h": "c",
+        "cl_data.h": "c",
+        "_null.h": "c",
+        "cdefs.h": "c",
+        "mlx_int.h": "c",
+        "view.c": "cpp",
+        "view.h": "c",
+        "mlx.h": "c",
+        "_pthread_cond_t.h": "c",
+        "render_views.c": "cpp",
+        "pthread.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "_structs.h": "c",
+        "unistd.h": "c",
+        "control.h": "c"
+    }
+}

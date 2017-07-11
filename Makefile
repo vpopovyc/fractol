@@ -6,29 +6,29 @@
 #    By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/28 19:25:38 by vpopovyc          #+#    #+#              #
-#    Updated: 2017/06/29 16:52:32 by vpopovyc         ###   ########.fr        #
+#    Updated: 2017/07/11 18:31:07 by vpopovyc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 EXEC = fractol
 
 # Compile rigth version of mlx correspoding to macos version
-MACSYSTEMVERSION := shell sw_vers -productVersion | cut -d '.' -f 1,2
+MACSYSTEMVERSION := $(shell sw_vers -productVersion | cut -d '.' -f 1,2)
 ifeq ($(MACSYSTEMVERSION), 10.12)
-	MLX_DIRECTORY = mlx_10.12/
-	CCMACSYSTEMVERSION = -D__OSXSIERRA__
+	MLX_DIRECTORY := mlx_10.12/
+	CCMACSYSTEMVERSION = -D__OSXSIERRA__ 
 else
-	MLX_DIRECTORY = mlx_10.11/
+	MLX_DIRECTORY := mlx_10.11/
 	CCMACSYSTEMVERSION = -D__OSXELCAPTAIN__
 endif
-MLX = $(addprefix $(MLX_DIRECTORY), libmlx.a)
+MLX := $(addprefix $(MLX_DIRECTORY), libmlx.a)
 
-SRC = main.c
-OBJ = $(SRC:.c=.o)
+HEADER = headers/cl_data.h headers/control.h headers/fractol.h 
+SRC := view/main.c model/cl_draw.c model/const_computing.c control/control.c model/model.c
+OBJ := $(SRC:.c=.o)
 CC = clang
-HEADER = fractol.h
-EXECFLAGS = -Wall -Wextra -Werror -framework AppKit -framework OpenGL
-OBJFLAGS = -g -Wall -Wextra -Werror
+OBJFLAGS := -g -Wall -Wextra -Werror
+EXECFLAGS := -Wall -Wextra -Werror -framework AppKit -framework OpenGL -framework OpenCL
 
 .phony: all clean fclean re mlxclean
  
@@ -37,7 +37,7 @@ all: $(MLX) $(OBJ)
 
 
 %.o: %.c ${HEADER}
-	$(CC) $(CCFLAGS)  -o $@ -c $< 
+	$(CC) $(OBJFLAGS) -o $@ -c $< 
 
 clean: 
 	/bin/rm -f $(OBJ) 
@@ -46,10 +46,10 @@ fclean:
 	/bin/rm -f $(OBJ) 
 	/bin/rm -f $(EXEC) 
 
-re: fclean all 
+re: fclean mlxclean all 
 
 $(MLX): 
-	make -C $(MLX_VERSION)
+	make -C $(MLX_DIRECTORY)
 
 mlxclean:
-	make -C $(MLX_VERSION) clean
+	make -C $(MLX_DIRECTORY) clean
