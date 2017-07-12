@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 20:10:32 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/11 18:13:04 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/12 19:43:14 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 ** Window attr - current iMac `27 full screen
 */
 
-# define WHEIGHT        (768)
+# define WHEIGHT        (1280)
 # define WWIDTH         (1280)
 
 /*

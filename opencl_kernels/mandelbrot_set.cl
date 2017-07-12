@@ -11,17 +11,19 @@ __kernel void       computing_set(__global int *A, __constant double *meta_data)
 
     // Window dimensions
     uint x = get_global_id(0) % 1280;
-    uint y = get_global_id(0) / 768;
+    uint y = get_global_id(0) / 1280;
 
     double2  vec_c;
-    vec_c.y = MaxIm - y * Im_factor;
-    vec_c.x = MinRe + x * Re_factor;
+
+    vec_c.x = x * Re_factor + MinRe;
+    vec_c.y = y * Im_factor + MinIm;
     
     double2  vec_Z = vec_c;
     char     is_inside = 0;
     double2  vec_Z_2;
 
-    for (uint iter = 0; iter < MaxIterations; ++iter)
+    uint iter;
+    for (iter = 0; iter < MaxIterations; ++iter)
     {
         vec_Z_2 = vec_Z * vec_Z;
         if ((vec_Z_2.x + vec_Z_2.y) > 4)
@@ -34,10 +36,10 @@ __kernel void       computing_set(__global int *A, __constant double *meta_data)
     }
     if (is_inside == 0) {
 
-        A [get_global_id(0)] = 0x820202;
+        A [get_global_id(0)] = ((int)vec_Z.x / 33 * 0x820202) >> 8;
     }
     else {
-
-        A [get_global_id(0)] = 0xffffff;
+        
+        A [get_global_id(0)] = (iter * 0x0F0F0F) >> 8;
     }
 }

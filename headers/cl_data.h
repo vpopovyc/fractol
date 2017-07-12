@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 16:02:14 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/11 18:27:17 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/12 19:43:08 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 ** Window attr - current iMac `27 full screen
 */
 
-# define WHEIGHT        (768)
+# define WHEIGHT        (1280)
 # define WWIDTH         (1280)
 
 /*
@@ -84,5 +84,5 @@ void                    init_model(t_cl *cl);
 
 void                    const_init(t_const *var, unsigned MaxIterations);
 void                    load_to_arg(t_const *var, cl_double *arg);
-void                    zoom_change(t_const *var, double new_zoom);
+void                    zoom_change(t_const *var, double new_zoom, int x, int y);
 #endif

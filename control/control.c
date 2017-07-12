@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/10 14:40:57 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/11 18:14:50 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/12 19:39:32 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ int     key_event(int keycode, void *argument)
 int     mouse_event(int keycode, int x, int y, void *argument) 
 {
     printf("Keycode [%d] x[%d] y[%d]\n", keycode, x, y);
+    if (keycode == 5)
+    {
+        zoom_change(((t_mlx*)argument)->var, 0.9, x, y);
+        cl_update_model((t_mlx*)argument, MANDELBROT);
+    }
+    if (keycode == 4)
+    {
+        zoom_change(((t_mlx*)argument)->var, 1.1, x, y);
+        cl_update_model((t_mlx*)argument, MANDELBROT);
+    }
     (void)argument;
     return (0);
 }
