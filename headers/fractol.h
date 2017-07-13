@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 20:10:32 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/12 19:43:14 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/13 16:20:47 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # include <stdio.h>
 # include <math.h>
 # include <stdbool.h>
-# include <pthread.h>
 # include "../headers/cl_data.h"
 
 /*
@@ -45,12 +44,17 @@
 # define KEYPRESSMASK   (1L<<0)
 # define BUTTMOTNMASK   (1L<<13)
 # define STRCTNOTMASK   (1L<<17)
+
 /*
 ** Buttons keycodes
 */
 
 # define ESCAPE         53
 # define SPACE          49
+# define ARR_UP         126
+# define ARR_DOWN       125
+# define ARR_LEFT       123
+# define ARR_RIGTH      124
 
 /*
 ** Window attr - current iMac `27 full screen
@@ -70,6 +74,14 @@
 */
 
 # define MANDELBROT     "opencl_kernels/mandelbrot_set.cl"
+
+
+/*
+** Arrows move step
+*/
+
+# define ARR_STEP_P     (0.0001)
+# define ARR_STEP_N     (-0.0001)
 
 /*
 ** Graphic lib data 

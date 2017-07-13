@@ -6,11 +6,12 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 20:56:20 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/12 20:25:07 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/13 17:05:27 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/cl_data.h"
+#include "../headers/color_palette.h"
 
 /*
 ** Recalculates constant values, if zoom changed
@@ -32,6 +33,47 @@ static inline void     compute_const_variables(t_const *var, double delta_y, dou
 }
 
 /*
+** Max depth modification 
+*/
+
+void             iter_modify(t_const *var, int step)
+{
+    int  iter;
+
+    iter = var->MaxIterations + step;
+    if (iter < 0)
+        var->MaxIterations = 0;
+    else
+        var->MaxIterations = iter;
+}
+
+/*
+** Used for color picking
+*/
+
+void             set_new_base_color(t_const *var, int new_color)
+{
+    var->base_color = new_color;
+}
+
+/*
+** Method to make arrow movement possible
+*/
+
+void             arrow_move_vertical(t_const *var, double x, double y)
+{
+    var->MinIm -= x;
+    var->MaxIm -= y;
+    compute_complex_factor(var);
+}
+
+void             arrow_move_horizontal(t_const *var, double x, double y)
+{
+    var->MinRe -= x;
+    var->MaxRe -= y;
+    compute_complex_factor(var);
+}
+/*
 ** Function to increase or reduse fractals depth 
 */
 
@@ -41,8 +83,8 @@ void                    zoom_change(t_const *var, double new_zoom, int x, int y)
     double delta_y;
 
     var->zoom = new_zoom;
-    delta_x = x * ((var->MaxRe - var->MinRe) / (WWIDTH - 1)) + var->MinRe;
-    delta_y = y * ((var->MaxIm - var->MinIm) / (WHEIGHT - 1)) + var->MinIm;
+    delta_x = x * var->Re_factor + var->MinRe;
+    delta_y = y * var->Im_factor + var->MinIm;
     compute_const_variables(var, delta_y, delta_x);
 }
 
@@ -59,6 +101,7 @@ void                    load_to_arg(t_const *var, cl_double *arg)
     arg[4] = var->MaxIm;
     arg[5] = var->Re_factor;
     arg[6] = var->Im_factor;
+    arg[7] = var->base_color;
 }
 
 /*
@@ -73,5 +116,6 @@ void                    const_init(t_const *var, unsigned MaxIterations)
     var->MinIm = 1.25;
     var->MaxIm = -1.25;
     compute_complex_factor(var);
+    set_new_base_color(var, CLR0);
     var->MaxIterations = MaxIterations;
 }

@@ -6,12 +6,12 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:24:46 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/12 19:57:47 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/13 16:53:17 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/fractol.h"
-#include "../headers/view.h"
+
 #include "../headers/cl_data.h"
 #include "../headers/control.h"
 
@@ -25,7 +25,7 @@ inline static void     main_struct_init(t_mlx *mlx)
     mlx->cl->image = (cl_char*)mlx_get_data_addr(mlx->image, NULL, NULL, NULL);
     init_model(mlx->cl);
     mlx->var = malloc(sizeof(t_const));
-    const_init(mlx->var, 842);
+    const_init(mlx->var, 100);
 /*
 */
     mlx_string_put(mlx->mlx, mlx->win, WWIDTH / 2 - 50, WHEIGHT / 2 - 50,  0xffffff, "fainting spells");

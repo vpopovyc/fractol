@@ -6,11 +6,12 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/10 14:40:57 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/12 19:39:32 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/13 16:58:52 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/fractol.h"
+#include "../headers/color_palette.h"
 
 int     win_close(void) 
 {
@@ -18,16 +19,81 @@ int     win_close(void)
     return (0);
 }
 
-int     key_event(int keycode, void *argument) 
+/*
+** Get needed color
+*/
+
+void    color_picker(int kc, t_mlx * mlx)
 {
-    printf("Keycode [%d]\n", keycode);
-    if (keycode == ESCAPE)
+    if (kc == 18)
+        set_new_base_color(mlx->var, CLR1);
+    else if (kc == 19)
+        set_new_base_color(mlx->var, CLR2);
+    else if (kc == 20)
+        set_new_base_color(mlx->var, CLR3);
+    else if (kc == 21)
+        set_new_base_color(mlx->var, CLR4);
+    else if (kc == 23)
+        set_new_base_color(mlx->var, CLR0);
+    cl_update_model(mlx, MANDELBROT);
+}
+
+/*
+** Move fractal corresponding to key pressed
+*/
+
+void    arrows_movement(int kc, t_mlx *mlx)
+{
+    int     x;
+    int     y;
+
+    x = 0;
+    y = 0;
+    if (kc == ARR_UP)
+        arrow_move_vertical(mlx->var, ARR_STEP_P, ARR_STEP_P);
+    else if (kc == ARR_DOWN)
+        arrow_move_vertical(mlx->var, ARR_STEP_N, ARR_STEP_N);
+    else if (kc == ARR_LEFT)
+        arrow_move_horizontal(mlx->var, ARR_STEP_N, ARR_STEP_N);
+    else if (kc == ARR_RIGTH)
+        arrow_move_horizontal(mlx->var, ARR_STEP_P, ARR_STEP_P);
+    cl_update_model(mlx, MANDELBROT);
+}
+
+/*
+** Iter addition and substraction
+*/
+
+# define ITER_P 69
+# define ITER_M 78
+# define STEP_IT_P 50
+# define STEP_IT_N -50
+
+void    iter_change(int kc, t_mlx *mlx)
+{
+    if (kc == ITER_P)
+        iter_modify(mlx->var, STEP_IT_P);
+    else if (kc == ITER_M)
+        iter_modify(mlx->var, STEP_IT_N);
+    cl_update_model(mlx, MANDELBROT);
+}
+
+int     key_event(int kc, void *argument) 
+{
+    printf("kc [%d]\n", kc);
+    if (kc == ESCAPE)
         win_close();
-    else if (keycode == 83)
+    else if (kc == 83)
     {
         ((t_mlx*)argument)->current_fractal = 1; 
         cl_update_model((t_mlx*)argument, MANDELBROT);
     }
+    else if (kc == 18 || kc == 19 || kc == 20 || kc == 21 || kc == 23)
+        color_picker(kc, (t_mlx*)argument);
+    else if (kc == 126 || kc == 123 || kc == 125 || kc == 124)
+        arrows_movement(kc, (t_mlx*)argument);
+    else if (kc == 69 || kc == 78)
+        iter_change(kc, (t_mlx*)argument);
     return (0);
 }
 
@@ -44,7 +110,6 @@ int     mouse_event(int keycode, int x, int y, void *argument)
         zoom_change(((t_mlx*)argument)->var, 1.1, x, y);
         cl_update_model((t_mlx*)argument, MANDELBROT);
     }
-    (void)argument;
     return (0);
 }
 

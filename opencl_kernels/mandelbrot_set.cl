@@ -1,13 +1,14 @@
 
 __kernel void       computing_set(__global int *A, __constant double *meta_data)
 {
+    int    MaxIterations = meta_data[0];
     double MinRe = meta_data[1];
     double MaxRe = meta_data[2];
     double MinIm = meta_data[3];
     double MaxIm = meta_data[4];
     double Re_factor = meta_data[5];
     double Im_factor = meta_data[6];
-    unsigned MaxIterations = meta_data[0];
+    int base_color = meta_data[7];
 
     // Window dimensions
     uint x = get_global_id(0) % 1280;
@@ -36,10 +37,10 @@ __kernel void       computing_set(__global int *A, __constant double *meta_data)
     }
     if (is_inside == 0) {
 
-        A [get_global_id(0)] = ((int)vec_Z.x / 33 * 0x820202) >> 8;
+        A [get_global_id(0)] = 0x82f2f2;
     }
     else {
         
-        A [get_global_id(0)] = (iter * 0x0F0F0F) >> 8;
+        A [get_global_id(0)] = (iter * base_color) & 0x00ffffff;
     }
 }

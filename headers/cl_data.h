@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 16:02:14 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/12 19:43:08 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/13 17:03:41 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 ** Input and output memmory buffers
 */
 
-# define CONST          (7)
+# define CONST          (8)
 # define SIZE           (WHEIGHT*WWIDTH)
 
 /*
@@ -68,7 +68,8 @@ typedef struct          s_const
     double              MaxIm;
     double              Re_factor;
     double              Im_factor;
-    unsigned            MaxIterations;
+    int                 base_color;
+    int                 MaxIterations;
 }                       t_const;
 
 /*
@@ -81,6 +82,21 @@ void                    init_model(t_cl *cl);
 ** Fts to update const values
 ** desription in definition
 */
+
+void                    set_new_base_color(t_const *var, int new_color);
+
+/*
+** Arrows move
+*/
+
+void                    arrow_move_vertical(t_const *var, double x, double y);
+void                    arrow_move_horizontal(t_const *var, double x, double y);
+
+/*
+** Iter modify 
+*/
+
+void                    iter_modify(t_const *var, int step);
 
 void                    const_init(t_const *var, unsigned MaxIterations);
 void                    load_to_arg(t_const *var, cl_double *arg);
