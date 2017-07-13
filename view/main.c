@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:24:46 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/13 16:53:17 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/13 20:17:19 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int             main(void)
     
     mlx_hook((*mlx).win, DESTROYNOTIFY, STRCTNOTMASK, win_close, NULL);
     mlx_hook((*mlx).win, KEYPRESS, KEYPRESSMASK, key_event, (void*)mlx);
-    mlx_hook((*mlx).win, MOTIONNOTIFY, BUTTMOTNMASK, motion_notify, NULL);
+    mlx_hook((*mlx).win, MOTIONNOTIFY, BUTTMOTNMASK, motion_notify, (void*)mlx);
     
     mlx_mouse_hook((*mlx).win, mouse_event, (void*)mlx);
     mlx_loop((*mlx).mlx);

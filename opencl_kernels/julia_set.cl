@@ -3,27 +3,37 @@ __kernel void       computing_set(__global int *A, __constant double *meta_data)
 {
     // Maximal depth
     int    MaxIterations = meta_data[0];
+
     // Imaginary and real dimensions
     double MinRe = meta_data[1];
     double MaxRe = meta_data[2];
     double MinIm = meta_data[3];
     double MaxIm = meta_data[4];
+
     // Pre-calculated range
     double Re_factor = meta_data[5];
     double Im_factor = meta_data[6];
+
     // Color
-    int base_color = meta_data[7];
+    int    base_color = meta_data[7];
+
+    // Julias constant
+    int    x_shift = meta_data[8];
+    int    y_shift = meta_data[9];
 
     // Window dimensions
     uint x = get_global_id(0) % 1280;
     uint y = get_global_id(0) / 1280;
 
     double2  vec_c;
+    double2  vec_Z;
 
-    vec_c.x = x * Re_factor + MinRe;
-    vec_c.y = y * Im_factor + MinIm;
+    vec_Z.x = x * Re_factor + MinRe;
+    vec_Z.y = y * Im_factor + MinIm;
     
-    double2  vec_Z = vec_c;
+    vec_c.x = x_shift;
+    vec_c.y = y_shift;
+
     char     is_inside = 0;
     double2  vec_Z_2;
 

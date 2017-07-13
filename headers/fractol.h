@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 20:10:32 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/13 16:20:47 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/13 21:33:49 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 
 # define ESCAPE         53
 # define SPACE          49
+# define ITER_P         69
+# define ITER_M         78
 # define ARR_UP         126
 # define ARR_DOWN       125
 # define ARR_LEFT       123
@@ -74,14 +76,18 @@
 */
 
 # define MANDELBROT     "opencl_kernels/mandelbrot_set.cl"
+# define MANDELTRIC     "opencl_kernels/mandelbrot_tricorn_set.cl"
+# define JULIA          "opencl_kernels/julia_set.cl"
 
 
 /*
-** Arrows move step
+** Arrows move and iter step
 */
 
 # define ARR_STEP_P     (0.0001)
 # define ARR_STEP_N     (-0.0001)
+# define STEP_IT_P      (50)
+# define STEP_IT_N      (-50)
 
 /*
 ** Graphic lib data 
@@ -94,6 +100,7 @@ typedef struct          s_mlx
     void                *image;
     t_cl                *cl;
     t_const             *var;
+    char                *fractal_path;
     char                current_fractal;
 }                       t_mlx;
 
@@ -101,7 +108,7 @@ typedef struct          s_mlx
 ** Main function to compute and draw fractals, depending on what kernel file was given
 */
 
-void                    cl_update_model(t_mlx *argument, const char *filepath);
+void    cl_update_model(t_mlx *mlx);
 
 
 #endif

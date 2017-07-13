@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/04 16:02:14 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/13 17:03:41 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/13 20:16:18 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 ** Input and output memmory buffers
 */
 
-# define CONST          (8)
+# define CONST          (10)
 # define SIZE           (WHEIGHT*WWIDTH)
 
 /*
@@ -70,6 +70,8 @@ typedef struct          s_const
     double              Im_factor;
     int                 base_color;
     int                 MaxIterations;
+    int                 x_shift;
+    int                 y_shift;
 }                       t_const;
 
 /*
@@ -97,6 +99,12 @@ void                    arrow_move_horizontal(t_const *var, double x, double y);
 */
 
 void                    iter_modify(t_const *var, int step);
+
+/*
+** Julia moves 
+*/
+
+void                    julia_moves(t_const *var, int x, int y);
 
 void                    const_init(t_const *var, unsigned MaxIterations);
 void                    load_to_arg(t_const *var, cl_double *arg);

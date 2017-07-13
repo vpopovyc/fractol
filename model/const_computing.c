@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 20:56:20 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/13 17:05:27 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/13 21:29:04 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 ** Recalculates constant values, if zoom changed
 */
 
-static inline void     compute_complex_factor(t_const *var)
+static inline void      compute_complex_factor(t_const *var)
 {
     var->Re_factor = (var->MaxRe - var->MinRe) / (WWIDTH - 1);
     var->Im_factor = (var->MaxIm - var->MinIm) / (WHEIGHT - 1);
 }
 
-static inline void     compute_const_variables(t_const *var, double delta_y, double delta_x)
+static inline void      compute_const_variables(t_const *var, double delta_y, double delta_x)
 {
     var->MinRe = var->MinRe * var->zoom + delta_x * (1 - var->zoom);
     var->MaxRe = var->MaxRe * var->zoom + delta_x * (1 - var->zoom);
@@ -36,7 +36,7 @@ static inline void     compute_const_variables(t_const *var, double delta_y, dou
 ** Max depth modification 
 */
 
-void             iter_modify(t_const *var, int step)
+void                    iter_modify(t_const *var, int step)
 {
     int  iter;
 
@@ -51,23 +51,33 @@ void             iter_modify(t_const *var, int step)
 ** Used for color picking
 */
 
-void             set_new_base_color(t_const *var, int new_color)
+void                    set_new_base_color(t_const *var, int new_color)
 {
     var->base_color = new_color;
+}
+
+/*
+** Calculating Julias shift
+*/
+
+void                    julia_moves(t_const *var, int x, int y)
+{
+    var->x_shift = x  * var->Re_factor + var->MinRe;
+    var->y_shift = y  * var->Im_factor + var->MinIm;
 }
 
 /*
 ** Method to make arrow movement possible
 */
 
-void             arrow_move_vertical(t_const *var, double x, double y)
+void                    arrow_move_vertical(t_const *var, double x, double y)
 {
     var->MinIm -= x;
     var->MaxIm -= y;
     compute_complex_factor(var);
 }
 
-void             arrow_move_horizontal(t_const *var, double x, double y)
+void                    arrow_move_horizontal(t_const *var, double x, double y)
 {
     var->MinRe -= x;
     var->MaxRe -= y;
@@ -102,6 +112,8 @@ void                    load_to_arg(t_const *var, cl_double *arg)
     arg[5] = var->Re_factor;
     arg[6] = var->Im_factor;
     arg[7] = var->base_color;
+    arg[8] = var->x_shift;
+    arg[9] = var->y_shift;
 }
 
 /*

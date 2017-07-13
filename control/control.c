@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/10 14:40:57 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/13 16:58:52 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/13 21:35:02 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void    color_picker(int kc, t_mlx * mlx)
         set_new_base_color(mlx->var, CLR4);
     else if (kc == 23)
         set_new_base_color(mlx->var, CLR0);
-    cl_update_model(mlx, MANDELBROT);
+    cl_update_model(mlx);
 }
 
 /*
@@ -57,17 +57,12 @@ void    arrows_movement(int kc, t_mlx *mlx)
         arrow_move_horizontal(mlx->var, ARR_STEP_N, ARR_STEP_N);
     else if (kc == ARR_RIGTH)
         arrow_move_horizontal(mlx->var, ARR_STEP_P, ARR_STEP_P);
-    cl_update_model(mlx, MANDELBROT);
+    cl_update_model(mlx);
 }
 
 /*
 ** Iter addition and substraction
 */
-
-# define ITER_P 69
-# define ITER_M 78
-# define STEP_IT_P 50
-# define STEP_IT_N -50
 
 void    iter_change(int kc, t_mlx *mlx)
 {
@@ -75,7 +70,7 @@ void    iter_change(int kc, t_mlx *mlx)
         iter_modify(mlx->var, STEP_IT_P);
     else if (kc == ITER_M)
         iter_modify(mlx->var, STEP_IT_N);
-    cl_update_model(mlx, MANDELBROT);
+    cl_update_model(mlx);
 }
 
 int     key_event(int kc, void *argument) 
@@ -86,7 +81,20 @@ int     key_event(int kc, void *argument)
     else if (kc == 83)
     {
         ((t_mlx*)argument)->current_fractal = 1; 
-        cl_update_model((t_mlx*)argument, MANDELBROT);
+        ((t_mlx*)argument)->fractal_path = MANDELBROT;
+        cl_update_model((t_mlx*)argument);
+    }
+    else if (kc == 84)
+    {
+        ((t_mlx*)argument)->current_fractal = 2; 
+        ((t_mlx*)argument)->fractal_path = JULIA;
+        cl_update_model((t_mlx*)argument);
+    }
+    else if (kc == 85)
+    {
+        ((t_mlx*)argument)->current_fractal = 3; 
+        ((t_mlx*)argument)->fractal_path = MANDELTRIC;
+        cl_update_model((t_mlx*)argument);
     }
     else if (kc == 18 || kc == 19 || kc == 20 || kc == 21 || kc == 23)
         color_picker(kc, (t_mlx*)argument);
@@ -99,26 +107,27 @@ int     key_event(int kc, void *argument)
 
 int     mouse_event(int keycode, int x, int y, void *argument) 
 {
-    printf("Keycode [%d] x[%d] y[%d]\n", keycode, x, y);
     if (keycode == 5)
-    {
         zoom_change(((t_mlx*)argument)->var, 0.9, x, y);
-        cl_update_model((t_mlx*)argument, MANDELBROT);
-    }
     if (keycode == 4)
-    {
         zoom_change(((t_mlx*)argument)->var, 1.1, x, y);
-        cl_update_model((t_mlx*)argument, MANDELBROT);
-    }
+    cl_update_model((t_mlx*)argument);
     return (0);
 }
 
 int     motion_notify(int x, int y, void *argument)
 {
-    if (x >= 0 && x <= WWIDTH && y >= 0 && y <= WHEIGHT)
+    int     in_window;
+    int     is_julia;
+
+    printf("Keycode  x[%d] y[%d]\n", x, y);
+    is_julia = ((t_mlx*)argument)->current_fractal == 2;
+    in_window = (x >= 0 && x <= WWIDTH && y >= 0 && y <= WHEIGHT);
+    if (in_window && is_julia)
     {
-        printf("x[%d] y[%d]\n", x, y);
+        julia_moves(((t_mlx*)argument)->var, x, y);
+        cl_update_model((t_mlx*)argument);
     }
-    (void)argument;
     return (0);
+
 }

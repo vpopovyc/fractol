@@ -127,14 +127,14 @@ void    cl_execute_kernel(t_cl *cl, t_mlx *mlx)
     mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image, 0, 0);
 }
 
-void    cl_update_model(t_mlx *mlx, const char *filepath)
+void    cl_update_model(t_mlx *mlx)
 {
     static char fractal;
 
     if (fractal != mlx->current_fractal)
     {
         // Compile kernel
-        cl_compile_kernel(mlx->cl, filepath);
+        cl_compile_kernel(mlx->cl, mlx->fractal_path);
         fractal = mlx->current_fractal;
     }
     // Args
