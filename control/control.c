@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/10 14:40:57 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/13 21:35:02 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/14 18:35:10 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,36 @@ int     key_event(int kc, void *argument)
     {
         ((t_mlx*)argument)->current_fractal = 3; 
         ((t_mlx*)argument)->fractal_path = MANDELTRIC;
+        cl_update_model((t_mlx*)argument);
+    }
+    else if (kc == 86)
+    {
+        ((t_mlx*)argument)->current_fractal = 4; 
+        ((t_mlx*)argument)->fractal_path = MANDEL_4TH;
+        cl_update_model((t_mlx*)argument);
+    }
+    else if (kc == 87)
+    {
+        ((t_mlx*)argument)->current_fractal = 5; 
+        ((t_mlx*)argument)->fractal_path = MANDEL_5TH;
+        cl_update_model((t_mlx*)argument);
+    }
+    else if (kc == 88)
+    {
+        ((t_mlx*)argument)->current_fractal = 6; 
+        ((t_mlx*)argument)->fractal_path = INFIN_JUL;
+        cl_update_model((t_mlx*)argument);
+    }
+    else if (kc == 89)
+    {
+        ((t_mlx*)argument)->current_fractal = 7; 
+        ((t_mlx*)argument)->fractal_path = INFIN_MAN;
+        cl_update_model((t_mlx*)argument);
+    }
+    else if (kc == 91)
+    {
+        ((t_mlx*)argument)->current_fractal = 8; 
+        ((t_mlx*)argument)->fractal_path = MANDEL_3TH;
         cl_update_model((t_mlx*)argument);
     }
     else if (kc == 18 || kc == 19 || kc == 20 || kc == 21 || kc == 23)

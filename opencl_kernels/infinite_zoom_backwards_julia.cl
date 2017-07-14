@@ -28,8 +28,8 @@ __kernel void       computing_set(__global int *A, __constant double *meta_data)
     double2  vec_c;
     double2  vec_Z;
 
-    vec_Z.x = x * Re_factor + MinRe;
-    vec_Z.y = y * Im_factor + MinIm;
+    vec_Z.x = cos(x * Re_factor + MinRe);
+    vec_Z.y = sin(y * Im_factor + MinIm);
     
     vec_c.x = x_shift;
     vec_c.y = y_shift;

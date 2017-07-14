@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/06 20:56:20 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/13 21:29:04 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/14 17:43:43 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,12 @@ void                    set_new_base_color(t_const *var, int new_color)
 ** Calculating Julias shift
 */
 
+#include <math.h>
+
 void                    julia_moves(t_const *var, int x, int y)
 {
-    var->x_shift = x  * var->Re_factor + var->MinRe;
-    var->y_shift = y  * var->Im_factor + var->MinIm;
+    var->x_shift = x * var->Re_factor + var->MinRe;
+    var->y_shift = y * var->Im_factor + var->MinIm;
 }
 
 /*

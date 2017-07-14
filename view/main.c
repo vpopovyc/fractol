@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 19:24:46 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/13 20:17:19 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/14 18:35:14 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,19 @@ inline static void     main_struct_init(t_mlx *mlx)
     mlx->cl->image = (cl_char*)mlx_get_data_addr(mlx->image, NULL, NULL, NULL);
     init_model(mlx->cl);
     mlx->var = malloc(sizeof(t_const));
-    const_init(mlx->var, 100);
+    const_init(mlx->var, 1000);
 /*
 */
     mlx_string_put(mlx->mlx, mlx->win, WWIDTH / 2 - 50, WHEIGHT / 2 - 50,  0xffffff, "fainting spells");
     mlx_string_put(mlx->mlx, mlx->win, WWIDTH / 2, WHEIGHT / 2,  0xffffff, "OpenCL fractal set renderer");
     mlx_string_put(mlx->mlx, mlx->win, WWIDTH / 2, WHEIGHT / 2 + 20,  0xffffff, "mandelbrot            - 1");
     mlx_string_put(mlx->mlx, mlx->win, WWIDTH / 2, WHEIGHT / 2 + 40,  0xffffff, "julia                 - 2");
-    // mlx_string_put(mlx->mlx, mlx->win, WWIDTH / 2, WHEIGHT / 2 + 80,  0xffffff, "");
+    mlx_string_put(mlx->mlx, mlx->win, WWIDTH / 2, WHEIGHT / 2 + 60,  0xffffff, "mandelbrot_tricorn    - 3");
+    mlx_string_put(mlx->mlx, mlx->win, WWIDTH / 2, WHEIGHT / 2 + 80,  0xffffff, "mandelbrot_4th        - 4");
+    mlx_string_put(mlx->mlx, mlx->win, WWIDTH / 2, WHEIGHT / 2 + 100, 0xffffff, "mandelbrot_5th        - 5");
+    mlx_string_put(mlx->mlx, mlx->win, WWIDTH / 2, WHEIGHT / 2 + 120, 0xffffff, "infinite julia        - 6");
+    mlx_string_put(mlx->mlx, mlx->win, WWIDTH / 2, WHEIGHT / 2 + 140, 0xffffff, "infinite mandelbrot   - 7");
+    mlx_string_put(mlx->mlx, mlx->win, WWIDTH / 2, WHEIGHT / 2 + 160, 0xffffff, "mandelbrot_3th        - 8");
 /*
 */
 }

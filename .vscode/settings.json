@@ -17,6 +17,7 @@
         "_structs.h": "c",
         "unistd.h": "c",
         "control.h": "c",
-        "color_palette.h": "c"
+        "color_palette.h": "c",
+        "_types.h": "c"
     }
 }

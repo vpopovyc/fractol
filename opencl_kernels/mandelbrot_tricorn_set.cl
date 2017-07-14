@@ -36,7 +36,7 @@ __kernel void       computing_set(__global int *A, __constant double *meta_data)
             is_inside = 1;
             break ;
         }
-        vec_Z.y = -2 * vec_Z.x * vec_Z.y + vec_c.y;
+        vec_Z.y = 4 * vec_Z.x * vec_Z.y * (vec_Z_2.x - vec_Z_2.x) + vec_c.y;
         vec_Z.x = vec_Z_2.x - vec_Z_2.y + vec_c.x;
     }
     if (is_inside == 0) {

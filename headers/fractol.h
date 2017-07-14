@@ -6,7 +6,7 @@
 /*   By: vpopovyc <vpopovyc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 20:10:32 by vpopovyc          #+#    #+#             */
-/*   Updated: 2017/07/13 21:33:49 by vpopovyc         ###   ########.fr       */
+/*   Updated: 2017/07/14 18:32:45 by vpopovyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,11 @@
 # define MANDELBROT     "opencl_kernels/mandelbrot_set.cl"
 # define MANDELTRIC     "opencl_kernels/mandelbrot_tricorn_set.cl"
 # define JULIA          "opencl_kernels/julia_set.cl"
-
+# define MANDEL_3TH     "opencl_kernels/mandelbrot_3th.cl"
+# define MANDEL_4TH     "opencl_kernels/mandelbrot_4th.cl"
+# define MANDEL_5TH     "opencl_kernels/mandelbrot_5th.cl"
+# define INFIN_JUL      "opencl_kernels/infinite_zoom_backwards_julia.cl"
+# define INFIN_MAN      "opencl_kernels/infinite_zoom_backwards_mandelbrot_5tth.cl"
 
 /*
 ** Arrows move and iter step
