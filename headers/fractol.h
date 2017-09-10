@@ -28,6 +28,7 @@
 # include <math.h>
 # include <stdbool.h>
 # include "../headers/cl_data.h"
+# include "../headers/keys.h"
 
 /*
 ** X11/X.h event names
@@ -49,14 +50,14 @@
 ** Buttons keycodes
 */
 
-# define ESCAPE         53
-# define SPACE          49
+# define ESCAPE         K_ESC
+# define SPACE          K_SP
 # define ITER_P         69
 # define ITER_M         78
-# define ARR_UP         126
-# define ARR_DOWN       125
-# define ARR_LEFT       123
-# define ARR_RIGTH      124
+# define ARR_UP         K_UA
+# define ARR_DOWN       K_DA
+# define ARR_LEFT       K_LA
+# define ARR_RIGTH      K_RA
 
 /*
 ** Window attr - current iMac `27 full screen
@@ -66,7 +67,7 @@
 # define WWIDTH         (1280)
 
 /*
-** OpenCL kernel file max size 
+** OpenCL kernel file max size
 */
 
 # define BUFF           (0x10000)
@@ -94,7 +95,7 @@
 # define STEP_IT_N      (-50)
 
 /*
-** Graphic lib data 
+** Graphic lib data
 */
 
 typedef struct          s_mlx
