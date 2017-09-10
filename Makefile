@@ -24,8 +24,8 @@ endif
 # Change mlx flags on Linux
 UNAME_S = $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-	MLX_FLAGS := -lmlx -lXext -lX11 -lOpenCL
 	MLX_DIRECTORY := minilibx_linux/
+	MLX_FLAGS := $(MLX_DIRECTORY)/libmlx.a -lXext -lX11 -lOpenCL
 	OPENCL_PATH_FLAG := -D__OS_LINUX_OPENCL__
 endif
 ifeq ($(UNAME_S),Darwin)

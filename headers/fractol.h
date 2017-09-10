@@ -52,8 +52,8 @@
 
 # define ESCAPE         K_ESC
 # define SPACE          K_SP
-# define ITER_P         69
-# define ITER_M         78
+# define ITER_P         K_NP_PLUS
+# define ITER_M         K_NP_MINUS
 # define ARR_UP         K_UA
 # define ARR_DOWN       K_DA
 # define ARR_LEFT       K_LA
