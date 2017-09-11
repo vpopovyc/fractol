@@ -19,8 +19,12 @@
 
 # if defined(__OSXSIERRA__)
     # include "../mlx_10.12/mlx.h"
-# else
+# endif
+# if defined(__OSXELCAPTAIN__)
     # include "../mlx_10.11/mlx.h"
+# endif
+# ifdef linux
+    # include "../minilibx_linux/mlx.h"
 # endif
 
 # include <stdlib.h>

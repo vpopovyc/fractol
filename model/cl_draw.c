@@ -25,12 +25,12 @@
 
 void    cl_compile_kernel(t_cl *cl, const char *filepath)
 {
-    int err;  
+    int err;
     FILE    *kernel_file;
     size_t  kernel_size;
     char    *kernel = malloc(sizeof(char) * BUFF);
 
-    // Load kernel from file 
+    // Load kernel from file
     kernel_file = fopen(filepath, "r");
     kernel_size = fread(kernel, 1, BUFF, kernel_file);
     kernel[kernel_size] = '\0';
@@ -66,7 +66,7 @@ void    cl_compile_kernel(t_cl *cl, const char *filepath)
 
 /*
 ** Create buffers and fill them with needed data
-** Create OpenCL memory objects  
+** Create OpenCL memory objects
 ** Enqueue synchronous writes of data, that was created, to that memory objects
 */
 
@@ -97,7 +97,7 @@ void    cl_create_args(t_cl *cl, t_const *var)
 }
 
 /*
-** Enqueue execution command of previously created kernel, then 
+** Enqueue execution command of previously created kernel, then
 ** Enqueue read command from memory object to result buffer
 */
 
@@ -141,7 +141,7 @@ void    cl_update_model(t_mlx *mlx)
     cl_create_args(mlx->cl, mlx->var);
     // Runtime
     cl_execute_kernel(mlx->cl, mlx);
-    
+
     // clReleaseMemObject(mlx->cl->input);
     // clReleaseMemObject(mlx->cl->constants);
     // clReleaseProgram(mlx->cl->program);

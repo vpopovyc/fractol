@@ -12,15 +12,6 @@
 
 EXEC = fractol
 
-# Compile rigth version of mlx correspoding to macos version
-MACSYSTEMVERSION := $(shell sw_vers -productVersion | cut -d '.' -f 1,2)
-ifeq ($(MACSYSTEMVERSION), 10.12)
-	MLX_DIRECTORY := mlx_10.12/
-	CCMACSYSTEMVERSION = -D__OSXSIERRA__
-else
-	MLX_DIRECTORY := mlx_10.11/
-	CCMACSYSTEMVERSION = -D__OSXELCAPTAIN__
-endif
 # Change mlx flags on Linux
 UNAME_S = $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
@@ -29,6 +20,15 @@ ifeq ($(UNAME_S),Linux)
 	OPENCL_PATH_FLAG := -D__OS_LINUX_OPENCL__
 endif
 ifeq ($(UNAME_S),Darwin)
+	# Compile rigth version of mlx correspoding to macos version
+	MACSYSTEMVERSION := $(shell sw_vers -productVersion | cut -d '.' -f 1,2)
+	ifeq ($(MACSYSTEMVERSION), 10.12)
+		MLX_DIRECTORY := mlx_10.12/
+		CCMACSYSTEMVERSION = -D__OSXSIERRA__
+	else
+		MLX_DIRECTORY := mlx_10.11/
+		CCMACSYSTEMVERSION = -D__OSXELCAPTAIN__
+	endif
 	MLX_FLAGS := -framework AppKit -framework OpenGL -framework OpenCL
 	OPENCL_PATH_FLAG := -D__OSX_OPENCL__
 endif
