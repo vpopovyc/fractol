@@ -13,10 +13,23 @@
 #ifndef __CL_DATA_H
 # define __CL_DATA_H
 
-# include "OpenCL/opencl.h"
+# ifdef __OSX_OPENCL__
+#  include "OpenCL/opencl.h"
+#endif
+# ifdef __OS_LINUX_OPENCL__
 
 /*
-** Capacity of iMac's SIMD unit 
+** use clCreateCommandQueue on device that don't support OpenCL 2.0 API
+*/
+
+#  define CL_USE_DEPRECATED_OPENCL_1_2_APIS
+#  include "CL/opencl.h"
+# endif
+
+# include <unistd.h>
+
+/*
+** Capacity of iMac's SIMD unit
 */
 
 # define SIMD           (256)
@@ -47,7 +60,7 @@ typedef struct          s_cl
 
     cl_program          program;
     cl_kernel           kernel;
-    
+
     cl_mem              input;
     cl_mem              constants;
     /* optimization purpose */
@@ -75,7 +88,7 @@ typedef struct          s_const
 }                       t_const;
 
 /*
-** Models 
+** Models
 */
 
 void                    init_model(t_cl *cl);
@@ -95,13 +108,13 @@ void                    arrow_move_vertical(t_const *var, double x, double y);
 void                    arrow_move_horizontal(t_const *var, double x, double y);
 
 /*
-** Iter modify 
+** Iter modify
 */
 
 void                    iter_modify(t_const *var, int step);
 
 /*
-** Julia moves 
+** Julia moves
 */
 
 void                    julia_moves(t_const *var, int x, int y);

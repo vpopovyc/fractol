@@ -1,4 +1,10 @@
-
+#ifdef cl_khr_fp64
+    #pragma OPENCL EXTENSION cl_khr_fp64 : enable
+#elif defined(cl_amd_fp64)
+    #pragma OPENCL EXTENSION cl_amd_fp64 : enable
+#else
+    #error "Double precision floating point not supported by OpenCL implementation."
+#endif
 __kernel void       computing_set(__global int *A, __constant double *meta_data)
 {
     // Maximal depth
@@ -43,7 +49,7 @@ __kernel void       computing_set(__global int *A, __constant double *meta_data)
         A [get_global_id(0)] = 0x82f2f2;
     }
     else {
-        
+
         A [get_global_id(0)] = (iter * base_color) & 0x00ffffff;
     }
 }

@@ -17,15 +17,19 @@
 
 inline static void     main_struct_init(t_mlx *mlx)
 {
+    int a;
+    int b;
+    int c;
+
     mlx->mlx = mlx_init();
     mlx->win = mlx_new_window(mlx->mlx, WWIDTH, WHEIGHT, "fractol / vpopovyc");
     mlx->image = mlx_new_image(mlx->mlx, WWIDTH, WHEIGHT);
-    
+
     mlx->cl = malloc(sizeof(t_cl));
-    mlx->cl->image = (cl_char*)mlx_get_data_addr(mlx->image, NULL, NULL, NULL);
+    mlx->cl->image = (cl_char*)mlx_get_data_addr(mlx->image, &a, &b, &c);
     init_model(mlx->cl);
     mlx->var = malloc(sizeof(t_const));
-    const_init(mlx->var, 1000);
+    const_init(mlx->var, 100);
 /*
 */
     mlx_string_put(mlx->mlx, mlx->win, WWIDTH / 2 - 50, WHEIGHT / 2 - 50,  0xffffff, "fainting spells");
@@ -48,11 +52,11 @@ int             main(void)
 
     mlx = malloc(sizeof(t_mlx));
     main_struct_init(mlx);
-    
+
     mlx_hook((*mlx).win, DESTROYNOTIFY, STRCTNOTMASK, win_close, NULL);
     mlx_hook((*mlx).win, KEYPRESS, KEYPRESSMASK, key_event, (void*)mlx);
     mlx_hook((*mlx).win, MOTIONNOTIFY, BUTTMOTNMASK, motion_notify, (void*)mlx);
-    
+
     mlx_mouse_hook((*mlx).win, mouse_event, (void*)mlx);
     mlx_loop((*mlx).mlx);
     return (0);
